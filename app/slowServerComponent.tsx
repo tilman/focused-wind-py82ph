@@ -1,8 +1,7 @@
-import { mockedSlowApiCall } from "../sleep";
+import { mockedApiCall } from "../sleep";
 
-/** Add your relevant code here for the issue to reproduce */
-export default async function SlowServerComponent() {
-  const res = await mockedSlowApiCall();
+export const SlowServerComponent: React.FC = async () => {
+  const res = await mockedApiCall(3000);
   return (
     <div>
       {res}

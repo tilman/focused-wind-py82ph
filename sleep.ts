@@ -1,12 +1,10 @@
-export function sleep(ms: number){
-    return new Promise((res) => setTimeout(res, ms));
-}
-
-export async function mockedApiCall() {
-    await sleep(500);
-    return "Mocked Regular Response"
-}
-export async function mockedSlowApiCall() {
-    await sleep(2000);
-    return "Mocked Slow Response"
+export async function mockedApiCall(ms: number) {
+    return await (await fetch(`http://localhost:3000/sleep?ms=${ms}`, {
+        next: {
+            revalidate: 5,
+            tags: [
+                "example"
+            ]
+        }
+    })).json();
 }
