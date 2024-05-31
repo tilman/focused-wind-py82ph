@@ -1,10 +1,7 @@
+export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 export async function mockedApiCall(ms: number) {
-    return await (await fetch(`http://localhost:3000/sleep?ms=${ms}`, {
-        next: {
-            revalidate: 5,
-            tags: [
-                "example"
-            ]
-        }
-    })).json();
+    await sleep(Number(ms));
+    const rdm = Math.random().toFixed(2);
+    return `Slept for ${ms}ms. Random digit ${rdm}`;
 }
